@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class ToolController extends Controller
 {
+
+    public function getTools()
+    {
+        $tools = Tool::all();
+        return response()->json($tools);
+    }
     public function createTool(Request $request)
     {
         try {
