@@ -37,4 +37,20 @@ class ToolController extends Controller
             ], 500);
         }
     }
+    public function deleteTool($id)
+    {
+        try {
+            $tool = Tool::findOrFail($id);
+            $tool->delete();
+
+            return response()->json([
+                'message' => 'Ferramenta removida!',
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Ferramenta não encontrada.',
+                'error' => $e->getMessage(),
+            ], 404);
+        };
+    }
 }
