@@ -15,6 +15,27 @@ class ToolController extends Controller
         $tools = Tool::all();
         return response()->json($tools);
     }
+
+    public function getToolsByTag(Request $request)
+    {
+        try {
+            $tag = $request->tag;
+            $tools = Tool::where('tags', 'LIKE', '%' . $tag . '%')->get();
+
+            if ($tools->isEmpty()) {
+                return response()->json([
+                    'message' => 'Nenhuma ferramenta encontrada.'
+                ], 404);
+            }
+
+            return response()->json($tools);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao buscar ferramentas',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
     public function createTool(Request $request)
     {
         try {
