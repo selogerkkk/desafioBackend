@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ToolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,6 @@ Route::post('auth/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['apiJwt']], function () {
     Route::get('users', [UserController::class, 'index']);
+
+    Route::post('tools', [ToolController::class, 'createTool']);
 });
