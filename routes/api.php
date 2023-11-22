@@ -26,6 +26,8 @@ Route::post('auth/login', [AuthController::class, 'login']);
 Route::group(['middleware' => ['apiJwt']], function () {
     Route::get('users', [UserController::class, 'index']);
 
+    Route::get('tools', [ToolController::class, 'getTools']);
+
     Route::post('tools', [ToolController::class, 'createTool']);
 
     Route::delete('tools/{id}', [ToolController::class, 'deleteTool']);
