@@ -12,8 +12,15 @@ class ToolController extends Controller
 
     public function getTools()
     {
-        $tools = Tool::all();
-        return response()->json($tools);
+        try {
+            $tools = Tool::all();
+            return response()->json($tools);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao buscar ferramentas.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     public function getToolsByTag(Request $request)
