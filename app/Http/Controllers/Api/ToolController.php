@@ -156,6 +156,39 @@ class ToolController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * @OA\Delete(
+     *     path="/api/tools/{id}",
+     *     summary="Remover uma ferramenta",
+     *     tags={"Ferramentas"},
+     *     security={{"bearer_token": {}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID da ferramenta a ser removida",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Ferramenta removida com sucesso",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Ferramenta removida!")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ferramenta não encontrada",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Ferramenta não encontrada."),
+     *             @OA\Property(property="error", type="string", example="Mensagem de erro específica.")
+     *         )
+     *     )
+     * )
+     */
     public function deleteTool($id)
     {
         try {
