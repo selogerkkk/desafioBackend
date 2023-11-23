@@ -87,6 +87,17 @@
                 ],
                 "summary": "Obter todas as ferramentas",
                 "operationId": "0909899ce445df8e6d8074dff14c707a",
+                "parameters": [
+                    {
+                        "name": "tag",
+                        "in": "query",
+                        "description": "Tag para filtrar as ferramentas",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Lista de todas as ferramentas",
