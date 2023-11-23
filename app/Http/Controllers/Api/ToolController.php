@@ -81,6 +81,53 @@ class ToolController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/tools",
+     *     summary="Criar uma nova ferramenta",
+     *     tags={"Ferramentas"},
+     *     security={{"bearer_token": {}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"title", "link", "description", "tags"},
+     *             @OA\Property(property="title", type="string", example="Nome da Ferramenta"),
+     *             @OA\Property(property="link", type="string", format="url", example="https://exemplo.com"),
+     *             @OA\Property(property="description", type="string", example="Descrição da ferramenta."),
+     *             @OA\Property(property="tags", type="array", @OA\Items(type="string"), example={"tag1", "tag2"})
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="Ferramenta adicionada com sucesso",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Ferramenta adicionada!"),
+     *             @OA\Property(property="tool", ref="#/components/schemas/Tool")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="400",
+     *         description="Erro de validação",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Erro de validação."),
+     *             @OA\Property(property="errors", type="object", example={"field_name": {"Error message"}})
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         description="Erro ao adicionar ferramenta",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Erro ao adicionar ferramenta."),
+     *             @OA\Property(property="error", type="string", example="Mensagem de erro específica.")
+     *         )
+     *     )
+     * )
+     */
+
     public function createTool(Request $request)
     {
         try {
