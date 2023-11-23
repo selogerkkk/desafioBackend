@@ -154,6 +154,124 @@
                         "bearer_token": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Ferramentas"
+                ],
+                "summary": "Criar uma nova ferramenta",
+                "operationId": "64f7dd31e0a984f4c4447c5a049ea2d4",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "link",
+                                    "description",
+                                    "tags"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Nome da Ferramenta"
+                                    },
+                                    "link": {
+                                        "type": "string",
+                                        "format": "url",
+                                        "example": "https://exemplo.com"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descrição da ferramenta."
+                                    },
+                                    "tags": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "tag1",
+                                            "tag2"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ferramenta adicionada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ferramenta adicionada!"
+                                        },
+                                        "tool": {
+                                            "$ref": "#/components/schemas/Tool"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de validação",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro de validação."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "field_name": [
+                                                    "Error message"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro ao adicionar ferramenta",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro ao adicionar ferramenta."
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Mensagem de erro específica."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
             }
         }
     },
