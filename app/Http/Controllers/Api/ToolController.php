@@ -22,6 +22,13 @@ class ToolController extends Controller
      *     summary="Obter todas as ferramentas",
      *     tags={"Ferramentas"},
      *     security={{"bearer_token": {}}},
+     *     @OA\Parameter(
+     *         name="tag",
+     *         in="query",
+     *         required=false,
+     *         description="Tag para filtrar as ferramentas",
+     *         @OA\Schema(type="string")
+     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Lista de todas as ferramentas",
@@ -49,24 +56,16 @@ class ToolController extends Controller
      *     )
      * )
      */
-    public function getTools()
-    {
-        try {
-            $tools = Tool::all();
-            return response()->json($tools);
-        } catch (Exception $e) {
-            return response()->json([
-                'message' => 'Erro ao buscar ferramentas.',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
-    }
 
-    public function getToolsByTag(Request $request)
+    public function getTools(Request $request)
     {
         try {
-            $tag = $request->tag;
-            $tools = Tool::where('tags', 'LIKE', '%' . $tag . '%')->get();
+            $tag = $request->query('tag');
+            if ($tag) {
+                $tools = Tool::where('tags', 'LIKE', '%' . $tag . '%')->get();
+            } else {
+                $tools = Tool::all();
+            }
 
             if ($tools->isEmpty()) {
                 return response()->json([
