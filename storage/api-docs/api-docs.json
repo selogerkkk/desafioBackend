@@ -273,6 +273,69 @@
                     }
                 ]
             }
+        },
+        "/api/tools/{id}": {
+            "delete": {
+                "tags": [
+                    "Ferramentas"
+                ],
+                "summary": "Remover uma ferramenta",
+                "operationId": "da9179db0f7061e77dd630059c223a7a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da ferramenta a ser removida",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ferramenta removida com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ferramenta removida!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ferramenta não encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ferramenta não encontrada."
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Mensagem de erro específica."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
         }
     },
     "components": {
