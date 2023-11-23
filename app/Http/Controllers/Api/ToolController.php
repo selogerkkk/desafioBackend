@@ -7,9 +7,48 @@ use App\Models\Tool;
 use Exception;
 use Illuminate\Http\Request;
 
+
+/**
+ * @OA\Info(
+ *     title="Documentação de API para desafio backend",
+ *     version="1.0.0"
+ * )
+ */
 class ToolController extends Controller
 {
-
+    /**
+     * @OA\Get(
+     *     path="/api/tools",
+     *     summary="Obter todas as ferramentas",
+     *     tags={"Ferramentas"},
+     *     security={{"bearer_token": {}}},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Lista de todas as ferramentas",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Tool")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="401",
+     *         description="Não autorizado",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Não autorizado.")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         description="Erro ao buscar ferramentas",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Erro ao buscar ferramentas."),
+     *             @OA\Property(property="error", type="string", example="Mensagem de erro específica.")
+     *         )
+     *     )
+     * )
+     */
     public function getTools()
     {
         try {
